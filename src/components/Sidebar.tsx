@@ -89,13 +89,13 @@ const Sidebar = () => {
       <section>
         <input
           type="text"
-          className="border-2 rounded px-2 sm:mb-0"
+          className="border-2 rounded px-2 py-3 w-full sm:mb-2 "
           placeholder="Search Product"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
 
-        <div className="d-flex justify-center items-center">
+        <div className="flex flex-col justify-center mt-3 items-start">
           <input
             type="text"
             className="border-2 mr-2 px-5 py-3 mb-3 w-full"
@@ -115,34 +115,34 @@ const Sidebar = () => {
           {/* Categories */}
           <div className="mb-5">
             <h2 className="text-xl font-semibold mb-3">Categories</h2>
+
+            <section>
+              {categories.map((category, idx) => (
+                <label key={idx} className="block mb-2">
+                  <input
+                    type="radio"
+                    name="category"
+                    className="mr-2 w-[16px] h-[16px] cursor-pointer"
+                    value={category}
+                    onChange={() => handleChangeCategory(category)}
+                    checked={selectedCategory === category}
+                  />
+
+                  {category.toUpperCase()}
+                </label>
+              ))}
+            </section>
           </div>
-
-          <section>
-            {categories.map((category, idx) => (
-              <label key={idx} className="block mb-2">
-                <input
-                  type="radio"
-                  name="category"
-                  className="mr-2 w-[16px] h-[16px]"
-                  value={category}
-                  onChange={() => handleChangeCategory(category)}
-                  checked={selectedCategory === category}
-                />
-
-                {category.toUpperCase()}
-              </label>
-            ))}
-          </section>
 
           {/* Keywords: */}
 
-          <div className="mb-5">
-            <h2 className="text-xl font-semibold mb-3">
+          <div className="mb-5 w-full">
+            <h2 className="text-xl font-semibold mb-3 ">
               <div className="">
                 {keywords.map((keyword, idx) => (
                   <button
                     key={idx}
-                    className="block mb-2 px-4 py-2 w-full text-left border rounded hover:bg-gray-200"
+                    className="block mb-2 px-4 py-2 w-full text-left border rounded hover:bg-gray-200 cursor-pointer"
                     onClick={() => handleKeywordClick(keyword)}
                   >
                     {keyword.toUpperCase()}
@@ -154,7 +154,7 @@ const Sidebar = () => {
         </div>
 
         <button
-          className="w-full mb-[4rem] py-2 bg-black text-white rounded mt-5"
+          className="w-full mb-[4rem] py-2 bg-black text-white rounded mt-5 cursor-pointer"
           onClick={handleResetFilters}
         >
           Reset filters
